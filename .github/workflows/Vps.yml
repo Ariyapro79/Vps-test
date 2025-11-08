@@ -1,0 +1,16 @@
+name: VPS Test
+on:
+  workflow_dispatch: # dijalankan manual
+jobs:
+  run-vps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Jalankan VPS sementara
+        run: |
+          sudo apt update
+          sudo apt install -y nginx
+          echo "Hello from GitHub VPS!" | sudo tee /var/www/html/index.html
+          sudo systemctl start nginx
+          echo "Server berjalan di runner GitHub (sementara)."
+          sleep 21600  # biar tetap hidup selama 6 jam
